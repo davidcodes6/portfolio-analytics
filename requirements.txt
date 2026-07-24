@@ -1,0 +1,13 @@
+pandas>=2.2
+numpy>=1.26
+yfinance>=0.2.54
+scipy>=1.12
+statsmodels>=0.14
+matplotlib>=3.8
+plotly>=5.24
+requests>=2.31
+scikit-learn>=1.4
+cvxpy>=1.5
+pydantic>=2.6
+pytest>=8.0
+nbformat>=5.10

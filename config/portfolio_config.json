@@ -1,0 +1,20 @@
+{
+  "weights": {
+    "AAPL": 0.2,
+    "MSFT": 0.2,
+    "SPY": 0.25,
+    "TLT": 0.15,
+    "GLD": 0.1,
+    "BTC-USD": 0.1
+  },
+  "benchmark": "SPY",
+  "start_date": "2018-01-01",
+  "end_date": "2026-07-01",
+  "initial_capital": 100000,
+  "annual_risk_free_rate": 0.04,
+  "confidence_level": 0.95,
+  "rolling_short": 63,
+  "rolling_long": 126,
+  "rebalancing_frequency": "ME",
+  "transaction_cost_bps": 5
+}
