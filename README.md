@@ -1,58 +1,48 @@
-# Institutional Multi-Asset Portfolio Analytics Platform
+# Multi-Asset Portfolio Analytics
 
-A modular Google Colab and Python project for analyzing multi-asset portfolios across equities, ETFs, bonds, commodities and digital assets.
+A Python research project for comparing a weighted portfolio with a benchmark. It measures performance, downside risk, and asset-level risk contributions, and compares optimization and rebalancing strategies.
 
-## Features
+[Open the example report](reports/portfolio_analytics_report.html) · [View the analysis notebook](notebooks/portfolio_analytics_colab.ipynb)
 
-- Auto-adjusted market-data download with retry logic and local caching
-- Data validation and calendar alignment
-- Simple/log returns and wealth indices
-- Sharpe, Sortino, Calmar, drawdown, skewness, kurtosis and tail metrics
-- CAPM alpha/beta, tracking error, information ratio and capture ratios
-- Historical, normal, Student-t and Monte Carlo VaR
-- Historical and normal CVaR
-- Return and risk attribution
-- Rolling risk/performance analytics
-- Historical and hypothetical stress testing
-- Buy-and-hold and calendar-rebalancing simulations with transaction costs
-- Interactive Plotly charts and HTML export
-- Unit tests with known-answer checks
+The example report is a historical snapshot. Download the HTML file and open it in a browser to zoom, inspect values, or toggle series. The charts work offline.
 
-## Quick start in Google Colab
+## Run the analysis
 
-1. Upload the project ZIP and extract it, or clone the repository.
-2. Open `notebooks/portfolio_analytics_colab.ipynb`.
-3. Run the installation cell.
-4. Edit the `PortfolioConfig` weights and dates.
-5. Run all cells from top to bottom.
+From the extracted repository root, using Python 3.10 or newer:
 
-## Example configuration
-
-```python
-PortfolioConfig(
-    weights={
-        "AAPL": 0.20,
-        "MSFT": 0.20,
-        "SPY": 0.25,
-        "TLT": 0.15,
-        "GLD": 0.10,
-        "BTC-USD": 0.10,
-    },
-    benchmark="SPY",
-    start_date="2018-01-01",
-    end_date="2026-07-01",
-    initial_capital=100_000,
-)
+```bash
+python -m venv .venv
+# macOS/Linux
+source .venv/bin/activate
+# Windows PowerShell
+# .venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt notebook
+python -m notebook notebooks/portfolio_analytics_colab.ipynb
 ```
 
-## Data limitations
+Run the notebook from top to bottom. Edit the `PortfolioConfig` cell to change assets, weights, benchmark, or date range. The notebook downloads price data, caches it locally, and writes an interactive HTML report and CSV tables under `reports/`.
 
-Yahoo Finance is convenient for education and prototyping but is not an exchange-grade or point-in-time institutional feed. The project does not remove survivorship bias, model delisting returns, or guarantee corporate-action completeness. FRED observations may be revised. Results are research outputs, not investment advice.
+For Google Colab, upload and extract the full repository, open the notebook, and set its working directory to the extracted repository root. Run the installation cell before the imports.
 
-## Resume bullet
+## What the analysis covers
 
-Built a modular multi-asset portfolio analytics platform in Python that computes benchmark-relative performance, CAPM attribution, rolling risk, VaR/CVaR, historical stress tests, rebalancing costs and asset-level risk contributions, with automated data validation and interactive reporting.
+| Area | Outputs |
+| --- | --- |
+| Performance | Cumulative growth, drawdowns, Sharpe ratio, CAPM alpha and beta, and rolling benchmark exposure |
+| Risk | VaR and CVaR estimates, asset-level risk contribution, and historical and hypothetical stress tests |
+| Optimization | Minimum-variance and maximum-Sharpe portfolios and an efficient frontier |
+| Rebalancing | Buy-and-hold and calendar rebalancing with transaction costs |
 
-## Institutional upgrades
+## Project structure
 
-Replace free market data with point-in-time licensed data; add holdings and trade databases, factor-risk models, shrinkage covariance, constrained optimization, live position feeds, liquidity and market-impact models, CI/CD, Docker, authentication, monitoring and scheduled risk-limit alerts.
+- `src/` contains reusable data, analytics, optimization, and reporting modules.
+- `notebooks/` contains the end-to-end workflow and editable example configuration.
+- `config/portfolio_config.json` documents an example configuration.
+- `reports/` contains the sample report. Notebook runs also write CSV exports.
+- `tests/` contains known-answer checks for analytics and optimization.
+
+Run the tests with `python -m pytest -q`.
+
+The analysis uses adjusted Yahoo Finance prices. Historical estimates depend on the selected assets, period, and assumptions. The workflow does not account for survivorship bias or delisting returns. See the notebook for additional modeling assumptions.
+
+MIT License. See [LICENSE](LICENSE).

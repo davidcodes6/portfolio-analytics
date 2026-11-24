@@ -12,3 +12,5 @@ reports/exports/*
 !data/cache/.gitkeep
 !reports/charts/.gitkeep
 !reports/exports/.gitkeep
+.venv/
+.pytest_cache/

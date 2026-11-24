@@ -11,3 +11,5 @@ cvxpy>=1.5
 pydantic>=2.6
 pytest>=8.0
 nbformat>=5.10
+
+jinja2>=3.1
